@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../Common/css/main.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../Common/scripts/jquery-1.8.2.js"></script>
+    <script src="../../Common/scripts/application.js"></script>
+
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    Ajax File Upload Example
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            <form method = "POST" action ="." id="ajaxupload">
+                <input type="file" style="display:block;padding-bottom:10px;" name="toupload" />
+                <button type="submit" class="btn btn-info">Upload</button>
+            </form>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - Mehmet Sencer KARADAYI</p>
+            </div>
+        </div>
+
+    </footer>
+    <script type="text/javascript">
+    	$(function(){
+            $("#ajaxupload").submit(function(e){
+                e.preventDefault();
+
+                var $form    = $(this),
+                    formData = new FormData(),
+                    params   = $form.serializeArray(),
+                    files    = $form.find('[name="toupload"]')[0].files;
+
+                $.each(files, function(i, file) {
+                    formData.append('uploadedFiles-' + i, file);
+                });
+
+                $.each(params, function(i, val) {
+                    formData.append(val.name, val.value);
+                });
+
+                $.ajax({
+                    url: $form.attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(result) {
+                        // Process the result ...
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
