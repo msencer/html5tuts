@@ -882,27 +882,229 @@ myArray[<span class="hljs-number">2</span>] = [“x1”,”x2”];</code></pre>
 </tbody></table>
 
 
-<p>1</p>
 
-<p>1 <br>
-1</p>
 
-<p>1 <br>
-1</p>
+<h3 id="jquery">JQuery</h3>
 
-<p>1 <br>
-1</p>
+<p>JQuery is a javascript library created by John Resing in 2006 with the following motto - <strong>Write less, do more</strong></p>
 
-<p>1 <br>
-1</p>
+<blockquote>
+  <p>JQuery is powerful in;</p>
+  
+  <ul>
+  <li>DOM Manipulation, using an open-source selector called Sizzle</li>
+  <li>Event handling</li>
+  <li>AJAX support</li>
+  <li>Animations</li>
+  <li>Cross-browser support</li>
+  </ul>
+</blockquote>
 
-<p>1 <br>
-1 <br>
-1</p>
 
-<p>1 <br>
-1 <br>
-1</p>
 
-<p>1 <br>
-1</p>
+<h4 id="selectors">Selectors</h4>
+
+<p>The most basic form is <strong>$(selector).action()</strong>.</p>
+
+<p>It uses CSS selectors in $ function. Some examples are;</p>
+
+<blockquote>
+  <p><span>$</span>(“#id”), <span>$</span>(“.classname”), $(“tagname”)</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">$(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    <span class="hljs-comment">// executed when document is ready</span>
+});</code></pre>
+
+<table>
+<thead>
+<tr>
+  <th>Selector</th>
+  <th>Desc</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>$(“*”)</td>
+  <td>all elements</td>
+</tr>
+<tr>
+  <td>$(this)</td>
+  <td>current element</td>
+</tr>
+<tr>
+  <td>$(“p.intro”)</td>
+  <td>all p elements with class intro</td>
+</tr>
+<tr>
+  <td>$(“ul li:first”)</td>
+  <td>first li element of first ul</td>
+</tr>
+<tr>
+  <td>$(“ul li:first-child”)</td>
+  <td>first li element of every ul</td>
+</tr>
+<tr>
+  <td>$(“[href]”)</td>
+  <td>all elements with href attr</td>
+</tr>
+<tr>
+  <td>$(“a[target=’_blank’]”)</td>
+  <td>anchors with target = _blank</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="events-1">Events</h4>
+
+<table>
+<thead>
+<tr>
+  <th>Mouse Events</th>
+  <th>Keyboard Events</th>
+  <th>Form Events</th>
+  <th>Document Events</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>click</td>
+  <td>keypress</td>
+  <td>submit</td>
+  <td>load</td>
+</tr>
+<tr>
+  <td>dblclick</td>
+  <td>keydown</td>
+  <td>change</td>
+  <td>resize</td>
+</tr>
+<tr>
+  <td>mouseenter</td>
+  <td>keyup</td>
+  <td>focus</td>
+  <td>scroll</td>
+</tr>
+<tr>
+  <td>mouseleave</td>
+  <td></td>
+  <td>blur</td>
+  <td>unload</td>
+</tr>
+</tbody></table>
+
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">$(“#btn”).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    <span class="hljs-comment">//code to execute on click event</span>
+});</code></pre>
+
+
+
+<h4 id="dom-manipulation-with-jquery">DOM Manipulation with JQuery</h4>
+
+<blockquote>
+  <ul>
+  <li>text() | Gets or sets the text content of the selected element</li>
+  <li>html() | Gets or sets the html content of the selected element</li>
+  <li>val() | Gets or sets the value of fields</li>
+  <li>attr() | Gets or sets the value of given attribute of the element</li>
+  <li>addClass() | Adds css class to the element</li>
+  </ul>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">var</span> el = $(“<span class="hljs-preprocessor">#name”);</span>
+<span class="hljs-keyword">var</span> name = el.val();
+el.attr(“disabled”);</code></pre>
+
+<p>Creating a new element in JQuery is fairly simple. </p>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript"><span class="hljs-keyword">var</span> newDiv = $(“&lt;div&gt;”);</code></pre>
+
+<p>For adding elements into other elements we may use the following functions</p>
+
+<blockquote>
+  <ul>
+  <li>append() | inserts the element at the end of the selected element</li>
+  <li>prepend() | inserts the element at the beginning of the selected element</li>
+  <li>after() | inserts the element after the selected element</li>
+  <li>before() | inserts the element before the selected element</li>
+  </ul>
+</blockquote>
+
+<p>In order to remove element</p>
+
+<blockquote>
+  <ul>
+  <li>remove() | removes the selected element</li>
+  <li>empty() | removes all the children of the selected element</li>
+  </ul>
+</blockquote>
+
+
+
+<h4 id="effects">Effects</h4>
+
+<blockquote>
+  <ul>
+  <li>animate()</li>
+  <li>slideUp(), slideDown(), slideToggle()</li>
+  <li>fadeIn(), fadeOut(), fadeToggle()</li>
+  <li>hide(), show()</li>
+  </ul>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs css">$("<span class="hljs-tag">div</span><span class="hljs-class">.block</span>")<span class="hljs-class">.animate</span>(<span class="hljs-rules">{ 
+  <span class="hljs-rule"><span class="hljs-attribute">fontSize</span>:<span class="hljs-value"> <span class="hljs-string">"2em"</span>, 
+  width: <span class="hljs-string">"+=20%"</span>, 
+  backgroundColor: <span class="hljs-string">"green"</span> 
+</span></span></span>});
+</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">$(<span class="hljs-string">"div.block"</span>).hide(<span class="hljs-string">"slow"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span> 
+  $(<span class="hljs-keyword">this</span>).show(<span class="hljs-string">"slow"</span>); 
+});
+</code></pre>
+
+
+
+<h4 id="dom-traversing">DOM Traversing</h4>
+
+<blockquote>
+  <ul>
+  <li>parent()</li>
+  <li>parents() | Until document root</li>
+  <li>parentsUntil()</li>
+  <li>children()</li>
+  <li>find()</li>
+  <li>next(), nextUntil(), prev(), prevUntil()</li>
+  </ul>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">$(document).ready(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    $(<span class="hljs-string">"div"</span>).find(<span class="hljs-string">"span"</span>);
+});</code></pre>
+
+<blockquote>
+  <p>filter() - Elements that do not match the criteria are removed from the selection, and those that match will be returned. <br>
+  not() - Elements that do match the criteria are removed from the selection.</p>
+</blockquote>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript">$(document).ready(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{</span>
+    $(<span class="hljs-string">"p"</span>).filter(<span class="hljs-string">".intro"</span>);
+});</code></pre>
