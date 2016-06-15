@@ -15,6 +15,7 @@
 <li><a href="#output">output</a></li>
 </ul>
 </li>
+<li><a href="#javascript-form-validation">Javascript Form validation</a></li>
 </ul>
 </li>
 <li><a href="#references">References</a></li>
@@ -247,6 +248,24 @@
   <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span></code></pre>
+
+
+
+<h4 id="javascript-form-validation">Javascript Form validation</h4>
+
+<p>Using the onsubmit event of a form element, we can determine whether the form is valid or invalid using javascript.</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">onsubmit</span>=<span class="hljs-value">"return validateForm(this);"</span>&gt;</span> ….</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs javascript"><span class="hljs-keyword">var</span> validateForm = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(form)</span>{</span>
+    <span class="hljs-keyword">if</span>(form.el1.value == “”)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-comment">// validation logic continues</span>
+}</code></pre>
 
 
 
