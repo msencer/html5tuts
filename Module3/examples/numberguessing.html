@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../Common/css/main.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../Common/scripts/jquery-1.8.2.js"></script>
+    <script src="../../Common/scripts/application.js"></script>
+    <script src="./js/guessingcore.js"></script>
+    <style>
+        .correct{
+            color: green;
+        }
+        .wrong{
+            color:red;
+        }
+        #actions{
+            height:500px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    Number Guessing Game - JS
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            
+                <pre style="width:400px">
+          Game Rules:
+              - 1 step close; -20
+              - 2 step close; -50
+              - other -100
+                </pre>   
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="text" id="guess" placeholder="Guess a number?">
+                </div>
+                <div class="col-md-2">
+                    <label id="score" />
+                </div>
+                <div class="col-md-2">
+                    <button id="btnRestart">Restart</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul id="actions"></ul>
+                <div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - Mehmet Sencer KARADAYI</p>
+            </div>
+        </div>
+
+    </footer>
+    <script type="text/javascript">
+    	$(function(){
+            var game = new Game(10);
+            var txtGuess = document.getElementById("guess");
+            var history = document.getElementById("actions");
+            txtGuess.addEventListener("change",function(){
+            
+                var guess = txtGuess.value;
+                var result = game.guess(guess);
+                var historyItem = document.createElement("li");
+                if(result.stat){
+                    historyItem.innerHTML = "Congratulations!"
+                    historyItem.className = "correct";
+                    txtGuess.setAttribute("disabled",true);
+                }
+                else{
+                    historyItem.innerHTML = "Wrong! - Current Score : " + result.score;   
+                    historyItem.className = "wrong";
+                }
+                history.appendChild(historyItem);
+                document.getElementById("score").innerHTML = result.score;
+                clear();
+            });
+
+            var clear = function(){
+                txtGuess.value = "";
+            };
+
+            document.getElementById("btnRestart").onclick = function(){
+                game.restart();
+                clear();
+                while (history.firstChild) {
+                    history.removeChild(history.firstChild);
+                }
+                txtGuess.removeAttribute("disabled");
+                document.getElementById("score").innerHTML = "";
+            };
+        });
+    </script>
+</body>
+</html>

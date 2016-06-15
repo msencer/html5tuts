@@ -14,15 +14,13 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    DOM Manipulation Example - Grocery List
+                    Title
                 </p>
             </div>
         </div>
     </header>
     <div id="body">
         <section class="content-wrapper main-content clear-fix">
-        	<input type="text" style="width:500px" placeholder="Type & press enter to add an item" id="txtItem" />
-        	<ul id="glist"></ul>
         </section>
     </div>
     <footer>
@@ -34,28 +32,9 @@
 
     </footer>
     <script type="text/javascript">
-    	var txtField = document.getElementById("txtItem");
-    	var clear = function(){
-    		txtField.value = "";
-    	}
-    	var deleteItem = function(e){
-    		var item = e.toElement.parentElement;
-    		document.getElementById("glist").removeChild(item);
-    	};
-    	txtField.addEventListener("change",function(){
-    		var val = txtField.value;
-    		var li = document.createElement("li");
-    		var del = document.createElement("span");
-    		del.className = "glyphicon glyphicon-minus-sign";
-    		del.style.padding = "5px";
-    		del.style.cursor = "hand";
-    		del.addEventListener("click",deleteItem);
-    		li.innerHTML = val;
-    		li.appendChild(del);
-    		document.getElementById("glist").appendChild(li);
-    		clear();
-    	});
+    	$(function(){
 
+        });
     </script>
 </body>
 </html>
