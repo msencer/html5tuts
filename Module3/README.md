@@ -47,6 +47,14 @@
 </li>
 </ul>
 </li>
+<li><a href="#jquery">JQuery</a><ul>
+<li><a href="#selectors">Selectors</a></li>
+<li><a href="#events-1">Events</a></li>
+<li><a href="#dom-manipulation-with-jquery">DOM Manipulation with JQuery</a></li>
+<li><a href="#effects">Effects</a></li>
+<li><a href="#dom-traversing">DOM Traversing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
