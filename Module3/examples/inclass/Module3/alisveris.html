@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        li>button{
+            margin-left:10px;
+        }
+        .strike {
+            text-decoration:line-through;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="Type & enter" id="txtInp"/>
+    <ul id="sepetim"></ul>
+
+    <script type="text/javascript">
+        document.getElementById("txtInp").onchange = function (event) {
+            var deger = event.target.value;
+            if (checkDup(deger))
+                return;
+
+            var li = document.createElement("li");
+            var span = document.createElement("span");
+            span.innerText = deger;
+            var btnDelete = document.createElement("button");
+            btnDelete.innerText = "Sil";
+            li.appendChild(span);
+            li.appendChild(btnDelete);
+            
+            btnDelete.addEventListener("click", function (event) {
+                event.target.parentNode.children[0].className = "strike";
+            });
+
+            btnDelete.addEventListener("click", function (event) {
+                //document.getElementById("sepetim").removeChild(event.target.parentNode);
+            });
+
+
+
+            document.getElementById("sepetim").appendChild(li);
+
+            event.target.value = "";
+        };
+        function checkDup(val) {
+            var children = document.getElementById("sepetim").children;
+            for (var i = 0; i < children.length; ++i) {
+                if (val === children[i].children[0].innerText)
+                    return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+        li>button{
+            margin-left:10px;
+        }
+        .strike {
+            text-decoration:line-through;
+        }
+    </style>
+    <script src="../scripts/jquery-2.0.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <input type="text" placeholder="Type & enter" id="txtInp"/>
+    <ul id="sepetim"></ul>
+
+    <script type="text/javascript">
+        $(function () {
+            $("#txtInp").change(function () {
+                var deger = $(this).val();
+                if (checkDup(deger))
+                    return;
+                var li = $("<li>").append(
+                    $("<span>").text(deger)
+                ).append(
+                    $("<button>").text("Sil").click(function () {
+                        $(this).parent().fadeOut("slow");
+                    })
+                );
+                $("#sepetim").append(li);
+                $(this).val("") // txtbox içini boşaltır
+            });
+
+            var checkDup = function (deger) {
+                var dups = $("#sepetim")
+                    .find("span")
+                    .filter(function (i, e) {
+                        return $(e).text() == deger;
+                });
+                return dups.length > 0;
+            }
+        });
+    </script>
+</body>
+</html>
