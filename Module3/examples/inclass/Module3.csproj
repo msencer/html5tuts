@@ -94,11 +94,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Module3\jquery.sayitahmin.plugin.html" />
+    <Content Include="Module3\jquery.sayitahmin.oo.html" />
+    <Content Include="Module3\jquery.sayitahmin.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="scripts\gamelogic.js" />
     <Content Include="scripts\jquery-2.0.0.min.map" />
+    <Content Include="scripts\jquery.game.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

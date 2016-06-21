@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../scripts/jquery-2.0.0.min.js"></script>
+    <style>
+        ul{
+            display:block;
+        }
+        label,button,input{
+            margin:2px;
+        }
+        .correct{
+            color:green;
+
+        }
+        .incorrect{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="Guess a number" id="txtGuess" />
+    <label id="lblScore">1000</label>
+    <button id="btnRestart">Restart</button>
+    <ul id="history"></ul>
+
+    <script>
+        $(function () {
+
+            var randomSayi, score;
+            var startGame = function () {
+                randomSayi = Math.ceil(Math.random() * 10);
+                score = 1000;
+                $("#txtGuess").prop("disabled", false);
+                $("#history").empty();
+                $("#lblScore").text(score);
+            }
+
+            startGame();
+
+
+            $("#txtGuess").change(function () {
+                var tahmin = parseInt($(this).val());
+                var diff = Math.abs(tahmin - randomSayi);
+
+                var historyItem = $("<li>");
+
+                switch (diff) {
+                    case 0:
+                        historyItem.text("Tebrikler bildiniz!").addClass("correct");
+                        $(this).prop("disabled", true);
+                        break;
+                    case 1:
+                        score -= 20;
+                        historyItem.text("Yanlış tahmin!").addClass("incorrect");
+                        break;
+                    case 2:
+                        score -= 50;
+                        historyItem.text("Yanlış tahmin!").addClass("incorrect");
+                        break;
+                    default:
+                        score -= 100;
+                        historyItem.text("Yanlış tahmin!").addClass("incorrect");
+                        break;
+                }
+                if (score <= 0) {
+                    historyItem.text("Oyunu kaybettiniz!").addClass("incorrect");
+                    $(this).prop("disabled", true);
+                }
+
+                $("#history").append(historyItem);
+                $("#lblScore").text(score);
+                $(this).val("");
+            });
+            $("#btnRestart").click(function () {
+                startGame();
+            });
+        });
+    </script>
+</body>
+</html>

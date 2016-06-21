@@ -31,3 +31,5 @@ D:\GK\Module3\Module3\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\GK\Module3\Module3\obj\Debug\Module3.csprojResolveAssemblyReference.cache
 D:\GK\Module3\Module3\obj\Debug\Module3.dll
 D:\GK\Module3\Module3\obj\Debug\Module3.pdb
+C:\Users\BEM\Documents\GitHub\html5tuts\Module3\examples\inclass\obj\Debug\Module3.dll
+C:\Users\BEM\Documents\GitHub\html5tuts\Module3\examples\inclass\obj\Debug\Module3.pdb

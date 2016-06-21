@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../scripts/jquery-2.0.0.min.js"></script>
+    <script src="../scripts/gamelogic.js"></script>
+    <script src="../scripts/jquery.game.js"></script>
+    <style>
+        ul{
+            display:block;
+        }
+        label,button,input{
+            margin:2px;
+        }
+        .correct{
+            color:green;
+
+        }
+        .incorrect{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameArea"></div>
+    <script>
+        $(function () {
+            $("#gameArea").guessgame(10);
+        });
+    </script>
+</body>
+</html>
