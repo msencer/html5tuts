@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../../Common/css/main.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Common/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="../../Common/scripts/jquery-1.8.2.js"></script>
+    <style>
+    #statusBorder
+    {
+        position:relative;
+        height:5px;
+        width:100px;
+        border:solid 1px gray;
+        display:none;
+    }
+    #statusFill
+    {
+        position:absolute;
+        top:0;
+        left:0;
+        width:0px;
+        background-color:Blue;
+        height:5px;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    Long Running AJAX
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            <div id="statusBorder">
+                <div id="statusFill">
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - Mehmet Sencer KARADAYI</p>
+            </div>
+        </div>
+
+    </footer>
+    <script type="text/javascript">
+    	$(function(){
+
+            var uniqueId = Math.ceil(Math.random() * 1000);        
+            $('#startProcess').click(function() {
+                    $.post("Home/StartLongRunningProcess", { id: uniqueId }, function() {
+                        $('#statusBorder').show();
+                        getStatus();
+                    });
+                    event.preventDefault;
+            });
+            function getStatus() {
+                var url = 'Home/GetCurrentProgress/' + uniqueId;
+                $.get(url, function(data) {
+                    if (data != "100") {
+                        $('#status').html(data);
+                        $('#statusFill').width(data);
+                        window.setTimeout("getStatus()", 100);
+                    }
+                    else {
+                        $('#status').html("Done");
+                        $('#statusBorder').hide();
+                        alert("The Long process has finished");
+                    };
+                });
+            }
+        
+    
+        });
+    </script>
+</body>
+</html>
