@@ -1,0 +1,7 @@
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\bin\Debug\WebSocket_Server.exe.config
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\bin\Debug\WebSocket_Server.exe
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\bin\Debug\WebSocket_Server.pdb
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\bin\Debug\Fleck.dll
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.csprojResolveAssemblyReference.cache
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.exe
+D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.pdb

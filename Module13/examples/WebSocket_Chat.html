@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Javascript WebSockets</title>
+    <link href="../../Common/css/main.css" rel="stylesheet" />
+    <script src="../../Common/scripts/jquery-1.8.2.js"></script>
+    <script src="../../Common/scripts/application.js"></script>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    Web Socket Chat App
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            <input type="text" placeholder="Type something to send" id="message"/>
+            <ul id="messagesLog"></ul>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - Mehmet Sencer KARADAYI</p>
+            </div>
+        </div>
+
+    </footer>
+    
+    <script type="text/javascript">
+
+        (function() {
+
+            var log = $('#messagesLog');
+            function logMessage(msg) {
+               log.append("<li>" + msg + "</li>");
+            }
+
+            var webSocket =  window.WebSocket || window.MozWebSocket;
+            var ws = new webSocket("ws://localhost:8080");
+            
+            ws.onmessage = function (evt) {
+                logMessage("Mesaj geldi :" + evt.data);
+            };
+
+            ws.onopen = function () {
+                logMessage("Connection Opened");
+            };
+
+            ws.onclose = function() {
+                logMessage("Connection Closed");
+            };
+
+            $('#message').change( function() {
+                ws.send($('#message').val());
+            });
+        })();
+        
+
+
+    </script>
+</body>
+</html>
