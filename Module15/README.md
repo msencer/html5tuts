@@ -3,9 +3,11 @@
 <p><div class="toc">
 <ul>
 <li><a href="#programming-in-html-5-with-javascript-and-css3">Programming in HTML 5 with Javascript and CSS3</a><ul>
-<li><a href="#module-13">Module 13</a><ul>
-<li><a href="#why-to-use-ws">Why to use WS?</a></li>
-<li><a href="#how-to-use-ws">How to use WS</a></li>
+<li><a href="#module-15">Module 15</a><ul>
+<li><a href="#what-are-sses">What are SSEs?</a></li>
+<li><a href="#sses-vs-ws">SSEs vs WS?</a></li>
+<li><a href="#how-to-use-sses">How to use SSEs?</a></li>
+<li><a href="#event-stream-format">Event Stream Format</a></li>
 <li><a href="#references">References</a></li>
 </ul>
 </li>
@@ -14,8 +16,6 @@
 </ul>
 </div>
 </p>
-
-
 
 <h2 id="module-15">Module 15</h2>
 
