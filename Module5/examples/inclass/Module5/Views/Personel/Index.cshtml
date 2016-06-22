@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        fieldset label{
+            display:inline-block;
+            width:200px;
+        }
+         fieldset div{
+            margin:5px;
+        }
+        fieldset{
+            width:500px;
+            margin:auto;
+        }
+    </style>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <div> 
+        <span id="result"></span>
+        <form action="/Personel/Add" method="post"> @*onsubmit="return ajaxsubmit(this);"*@
+            <fieldset>
+                <legend>Personel Ekle</legend>
+                <div>
+                    <label>Ad Soyad : </label>
+                    <input type="text" required name="adSoyad" />
+                </div>
+                <div>
+                    <label>Telefon : </label>
+                    <input type="tel" name="tel" required pattern="^[0-9]{3} [0-9]{7}$" />
+                </div>
+                <div>
+                    <button type="submit">Ekle</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        /*function ajaxsubmit(form) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    document.getElementById("result").innerText = xhttp.responseText;
+                }
+                else if (xhttp.readyState == 4 && xhttp.status == 500) {
+                    document.getElementById("result").innerText = "Lütfen sistem yöneticisine haber verin : 500";
+                }
+            }
+            xhttp.open(form.method, form.action);
+            //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.setRequestHeader("Content-type", "application/json");
+            var jsonobj = { adSoyad: form.adSoyad.value, tel: form.tel.value };
+            //xhttp.send("adSoyad="+form.adSoyad.value+"&tel="+form.tel.value);
+            xhttp.send(JSON.stringify(jsonobj));
+
+            return false;
+        }*/
+
+        $("form[action='/Personel/Add']").submit(function (e) {
+            e.preventDefault();
+            $("#result").slideUp("slow");
+            var options = {
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                url:$(this).attr("action"),
+            };
+
+            $.ajax(options).success(function (result) {
+                $("#result").slideDown("slow");
+                $("#result").text(result);
+            })
+                .error(function (xhr,status,error) {
+                    $("#result").text("Hata oluştu : Code : "+status+" Error : "+error);
+            })
+
+        });
+    </script>
+</body>
+</html>

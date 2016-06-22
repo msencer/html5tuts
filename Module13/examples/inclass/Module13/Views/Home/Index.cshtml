@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <div id="loginpnl">
+            <input type="text" placeholder="Username" id="txtUserName" />
+            <button id="btnLogin">Login</button>
+        </div>
+        <div id="chatpnl">
+            <ul id="chathistory" style="display:block"></ul>
+            <select id="userlist">
+                <option value="">--Select user--</option>
+            </select>
+            <input type="text" placeholder="Enter a message" id="message" />
+        
+        </div>
+        
+    </div>
+
+    <script>
+        $("#loginpnl").hide();
+        $("#chatpnl").hide();
+        var pastusernames = "";
+        var ws = new WebSocket('ws://localhost:8181');
+        ws.onclose = function () {
+            var li = $("<li>").text("Connection closed!");
+            $("#serverHistory").append(li);
+        };
+        ws.onopen = function () {
+            $("#loginpnl").show();
+        };
+        ws.onerror = function (error) {
+            var li = $("<li>").text("Error raised : " + error);
+            $("#serverHistory").append(li);
+        };
+        ws.onmessage = function (message) {
+            if (message.data == "WELCOME!") {
+                $("#loginpnl").hide();
+                $("#chatpnl").show();
+            }
+            else if (message.data.toString().startsWith("USERS:")) {
+                var usernames = message.data.toString().split(":")[1];
+                if (pastusernames == usernames)
+                    return;
+                pastusernames = usernames;
+                $("#userlist").empty();
+                usernames.split(";").forEach(function (i, e) {
+                    var opt = $("<option>").val(i).text(i);
+                    $("#userlist").append(opt);
+                });
+            }
+            else {
+                console.log(message.data.toString());
+                var from = message.data.toString().split(">")[0],
+                    receivedmsg = message.data.toString().split(">")[1];
+                console.log(from);
+                var msgli = $("<li>").text(from + " : " + receivedmsg);
+                $("#chathistory").append(msgli);
+            }
+
+        };
+
+        $("#btnLogin").click(function () {
+            var username = $("#txtUserName").val();
+            ws.send("IAM:" + username);
+        });
+
+        $("#message").change(function () {
+            var message = $(this).val();
+            var to = $("#userlist").val();
+            ws.send(to+"->"+message);
+            $(this).val("");
+        });
+    </script>
+</body>
+</html>
