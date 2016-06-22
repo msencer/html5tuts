@@ -39,29 +39,34 @@
             $("#txtGuess").change(function () {
                 var tahmin = parseInt($(this).val());
 
-                var result = game.guess(tahmin);
-                var historyItem = $("<li>");
-                if (result.status) {
-                    if(result.score<=0)
-                        historyItem.text("Oyun bitt!").addClass("incorrect");
-                    else{
-                        historyItem.text("Doğru tahmin").addClass("correct");
-                        $(this).attr("disabled", true);
+                $.get("/Game/Guess", "guess=" + tahmin, function (result) {
+                    var historyItem = $("<li>");
+                    if (result.Status) {
+                        if (result.Score <= 0)
+                            historyItem.text("Oyun bitt!").addClass("incorrect");
+                        else {
+                            historyItem.text("Doğru tahmin").addClass("correct");
+                            $("#txtGuess").attr("disabled", true);
+                        }
                     }
-                }
-                else {
-                    historyItem.text("Yanlış tahmin!").addClass("incorrect");
-                }
+                    else {
+                        historyItem.text("Yanlış tahmin!").addClass("incorrect");
+                    }
 
-                $("#history").append(historyItem);
-                $("#lblScore").text(result.score);
-                $(this).val("");
+                    $("#history").append(historyItem);
+                    $("#lblScore").text(result.Score);
+                    $("#txtGuess").val("");
+                });
+
+                
             });
             $("#btnRestart").click(function () {
-                game.restart();
-                $("#txtGuess").prop("disabled", false);
-                $("#history").empty();
-                $("#lblScore").text("1000");
+                
+                $.post("/Game/Restart", function () {
+                    $("#txtGuess").prop("disabled", false);
+                    $("#history").empty();
+                    $("#lblScore").text("1000");
+                });
             });
         });
     </script>

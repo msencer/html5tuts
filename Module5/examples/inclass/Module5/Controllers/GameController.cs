@@ -25,5 +25,16 @@ namespace Module5.Controllers
             return Json(logic.Guess(guess), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult Restart()
+        {
+            if (Session["GameObject"] == null)
+                Session["GameObject"] = new GameLogic(10);
+
+            GameLogic logic = (GameLogic)Session["GameObject"];
+            logic.Restart();
+            return new EmptyResult();
+        }
+
     }
 }
