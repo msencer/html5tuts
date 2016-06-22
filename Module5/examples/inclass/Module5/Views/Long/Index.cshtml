@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        #longAjax{
+            width:300px;
+            margin:auto;
+        }
+        #statusBorder{
+            height:10px;
+            width:100px;
+            border:1px solid gray;
+            margin:auto;
+        }
+        #status{
+            background-color:blue;
+            width:0px;
+            height:10px;
+            
+        }
+    </style>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+</head>
+<body>
+    <div id="longAjax">
+        <div id="statusBorder">
+            <div id="status"></div>
+        </div>
+        <div style="margin:auto;width:100px">
+            <button id="btnStart">Start Process</button>
+        </div>
+    </div>
+    <script>
+        $("#statusBorder").hide();
+        var id = Math.ceil(Math.random() * 1000).toString();
+
+        $("#btnStart").click(function () {
+            $.ajax({
+                url:"/Long/StartProcess",
+                type: "POST",
+                data: "id=" + id
+            }).success(function () {
+                $("#statusBorder").show();
+                getStatus();
+            });
+
+        });
+
+        function getStatus() {
+            setInterval(function () {
+                $.get("/Long/GetStatus","id="+id, function (result) {
+                    $("#status").width(parseInt(result));
+                });
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>

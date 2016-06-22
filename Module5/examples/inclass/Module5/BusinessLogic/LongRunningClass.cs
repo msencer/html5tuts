@@ -19,7 +19,7 @@ public class LongRunningClass
     {
         for (int i = 1; i <= 100; i++)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(200);
             lock (syncRoot)
             {
                 ProcessStatus[id] = i;

@@ -96,12 +96,14 @@
     <Content Include="Web.config" />
     <Content Include="Views\Time\Index.cshtml" />
     <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Long\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BusinessLogic\GameLogic.cs" />
     <Compile Include="BusinessLogic\LongRunningClass.cs" />
     <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\LongController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\TimeController.cs" />
     <Compile Include="Global.asax.cs">
