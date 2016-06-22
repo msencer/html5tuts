@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @*<button id="btnGetTime">Server Time(AJAX)</button>*@
+        <span id="txtTime"></span>
+    </div>
+    <script>
+        var getTime = function () {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200)
+                    document.getElementById("txtTime").innerText = xhttp.responseText;
+            }
+            xhttp.open("GET", "/Time/GetTime");
+            xhttp.send();
+        };
+        setInterval(getTime, 1000);
+    </script>
+</body>
+</html>
