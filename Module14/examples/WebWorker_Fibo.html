@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Javascript Webworkers</title>
+    <link href="../../Common/css/main.css" rel="stylesheet" />
+    <script src="../../Common/scripts/jquery-1.8.2.js"></script>
+    <script src="../../Common/scripts/application.js"></script>
+    <script src="Fibonacci.WebWorker.js"></script>
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">
+                    Web Worker Sample
+                </p>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        <section class="content-wrapper main-content clear-fix">
+            <h4>Calculate Fibonacci Series - Web Worker</h4>
+            <input type="text" id="length"/>
+            <img src="../images/loader64.gif" width="16 " id="spinner"/>
+            <input type="button" id="calculateFib" value="Calculate Fibonacci"/>
+            <input type="button" id="terminateFib" value="Terminate"/>
+            <ol id="dataList"></ol>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>2016 - Mehmet Sencer KARADAYI</p>
+            </div>
+        </div>
+
+    </footer>
+    
+    <script type="text/javascript">
+
+        (function () {
+            
+            var worker;
+            var dList;
+            var spinner = $("#spinner");
+            
+            spinner.hide();
+            
+            $("#calculateFib").click(function () {
+                
+                dList = $('#dataList');
+                dList.html("");
+                var fibLength = parseInt( $('#length').val());
+
+                spinner.show();
+                $('#terminateFib').removeAttr("disabled");
+                getWorker().postMessage(fibLength);
+
+
+            });
+
+            $("#terminateFib").click(function() {
+                getWorker().terminate();
+                logData("Thread terminated");
+                spinner.hide();
+                $('#terminateFib').attr('disabled', 'disabled');
+            });
+
+            function getWorker() {
+                if (worker == null) {
+                    worker = new Worker("Fibonacci.WebWorker.js");
+                    worker.onmessage = messageHandler;
+                    worker.onerror = errorHandler;
+                    
+                }
+                return worker;
+            }
+
+            function logData(data) {
+               
+                dList.append("<li>" + data + "</li>");
+            }
+            
+            function messageHandler(e) {
+                spinner.hide();
+                var results = e.data;
+                $.each(results, function () {
+                    logData(this);
+                });
+                $('#terminateFib').attr('disabled', 'disabled');
+            }
+            
+
+            function errorHandler(e) {
+                alert(e.message);
+            }
+
+        })();
+    </script>
+</body>
+</html>
