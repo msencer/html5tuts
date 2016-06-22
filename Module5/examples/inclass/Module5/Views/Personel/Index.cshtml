@@ -22,11 +22,12 @@
             margin:auto;
         }
     </style>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
 </head>
 <body>
     <div> 
         <span id="result"></span>
-        <form action="/Personel/Add" method="post" onsubmit="return ajaxsubmit(this);">
+        <form action="/Personel/Add" method="post"> @*onsubmit="return ajaxsubmit(this);"*@
             <fieldset>
                 <legend>Personel Ekle</legend>
                 <div>
@@ -44,7 +45,7 @@
         </form>
     </div>
     <script>
-        function ajaxsubmit(form) {
+        /*function ajaxsubmit(form) {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -62,7 +63,26 @@
             xhttp.send(JSON.stringify(jsonobj));
 
             return false;
-        }
+        }*/
+
+        $("form[action='/Personel/Add']").submit(function (e) {
+            e.preventDefault();
+            $("#result").slideUp("slow");
+            var options = {
+                type: $(this).attr("method"),
+                data: $(this).serialize(),
+                url:$(this).attr("action"),
+            };
+
+            $.ajax(options).success(function (result) {
+                $("#result").slideDown("slow");
+                $("#result").text(result);
+            })
+                .error(function (xhr,status,error) {
+                    $("#result").text("Hata oluştu : Code : "+status+" Error : "+error);
+            })
+
+        });
     </script>
 </body>
 </html>
