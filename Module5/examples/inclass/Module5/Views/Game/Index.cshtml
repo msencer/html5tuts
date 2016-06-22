@@ -1,0 +1,69 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
+    <style>
+        ul {
+            display: block;
+        }
+
+        label, button, input {
+            margin: 2px;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="Guess a number" id="txtGuess" />
+    <label id="lblScore">1000</label>
+    <button id="btnRestart">Restart</button>
+    <ul id="history"></ul>
+
+    <script>
+        $(function () {
+            //TODO : connect with server
+            $("#txtGuess").change(function () {
+                var tahmin = parseInt($(this).val());
+
+                var result = game.guess(tahmin);
+                var historyItem = $("<li>");
+                if (result.status) {
+                    if(result.score<=0)
+                        historyItem.text("Oyun bitt!").addClass("incorrect");
+                    else{
+                        historyItem.text("Doğru tahmin").addClass("correct");
+                        $(this).attr("disabled", true);
+                    }
+                }
+                else {
+                    historyItem.text("Yanlış tahmin!").addClass("incorrect");
+                }
+
+                $("#history").append(historyItem);
+                $("#lblScore").text(result.score);
+                $(this).val("");
+            });
+            $("#btnRestart").click(function () {
+                game.restart();
+                $("#txtGuess").prop("disabled", false);
+                $("#history").empty();
+                $("#lblScore").text("1000");
+            });
+        });
+    </script>
+</body>
+</html>

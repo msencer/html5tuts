@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <script src="~/Scripts/jquery-2.1.0.min.js"></script>
 </head>
 <body>
     <div> 
@@ -16,7 +17,7 @@
         <span id="txtTime"></span>
     </div>
     <script>
-        var getTime = function () {
+        /*var getTime = function () {
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (xhttp.readyState == 4 && xhttp.status == 200)
@@ -24,6 +25,20 @@
             }
             xhttp.open("GET", "/Time/GetTime");
             xhttp.send();
+        };*/
+
+        var getTime = function () {
+            //var options = {
+            //    type: "GET",
+            //    url: "/Time/GetTime"
+            //};
+            //$.ajax(options).success(function (r) {
+            //    $("#txtTime").text(r);
+            //});
+
+            $.get("/Time/GetTime", function (r) {
+                $("#txtTime").text(r);
+            });
         };
         setInterval(getTime, 1000);
     </script>
