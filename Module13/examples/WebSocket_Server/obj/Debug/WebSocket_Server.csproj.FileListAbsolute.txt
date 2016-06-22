@@ -5,3 +5,9 @@ D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\bin\Debug\Fleck.dll
 D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.csprojResolveAssemblyReference.cache
 D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.exe
 D:\Sources\Samples\SamplesWebTemp\WebSocket_Server\obj\Debug\WebSocket_Server.pdb
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\bin\Debug\WebSocket_Server.exe.config
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\obj\Debug\WebSocket_Server.exe
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\obj\Debug\WebSocket_Server.pdb
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\bin\Debug\WebSocket_Server.exe
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\bin\Debug\WebSocket_Server.pdb
+C:\Users\BEM\Documents\GitHub\html5tuts\Module13\examples\WebSocket_Server\obj\Debug\WebSocket_Server.csprojResolveAssemblyReference.cache
