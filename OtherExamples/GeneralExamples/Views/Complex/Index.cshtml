@@ -1,0 +1,20 @@
+﻿@using GeneralExamples.Controllers;
+@model ComplexViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<ul>
+    @foreach(var c1 in Model.Class1List)
+    {
+        <li>@c1.Value</li>
+    }
+</ul>
+<ul>
+    @foreach (var c2 in Model.Class2List)
+    {
+        <li>@c2.Value</li>
+    }
+</ul>

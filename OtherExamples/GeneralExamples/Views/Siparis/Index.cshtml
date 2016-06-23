@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Siparis Ekleme</h2>
+<div class="row">
+    <div class="col-md-2">
+        <select id="lstUrunler" size="10" style="width:50%"></select>
+    </div>
+    <div class="col-md-4">
+        <form id="frmEkle">
+            <fieldset>
+                <legend>
+                    Siparişe ürün ekle
+                </legend>
+                <div class="form-group">
+                    <label for="txtUrunAd">Ürün Ad :</label>
+                    <input type="text" id="txtUrunAd" required class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txtFiyat">Fiyat :</label>
+                    <input type="text" id="txtFiyat" pattern="[0-9]+,[0-9]{2}" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="txtAdet">Adet :</label>
+                    <input type="number" id="txtAdet" class="form-control" />
+                </div>
+                <div>
+                    <button type="submit" id="btnEkle" class="btn btn-info">Ürün Ekle</button>
+                </div>
+            </fieldset>
+           
+        </form>
+        <button class="btn btn-danger" id="btnSendServer">DBye Kaydet</button>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        var sepet = { Urunler: [] };
+        var editingIndex = -1;
+        $("#frmEkle").submit(function (e) {
+            e.preventDefault();
+            var urunData;
+            if (editingIndex == -1)
+                urunData = {};
+            else
+                urunData = sepet.Urunler[editingIndex];
+
+            urunData.UrunAd = $(this).find("#txtUrunAd").val();
+            urunData.Fiyat = $(this).find("#txtFiyat").val();
+            urunData.Adet = $(this).find("#txtAdet").val();
+
+            sepet.Urunler.push(urunData);
+
+            if (editingIndex == -1)
+                $("#lstUrunler").append($("<option>").text(urunData.UrunAd));
+            //else
+              //  $("#lstUrunler:nth-child("+(editingIndex+1)+")").text(urunData.UrunAd);
+            this.reset();
+
+            editingIndex = -1;
+        });
+        $("#lstUrunler").change(function () {
+            console.log(this.selectedIndex);
+            var obj = sepet.Urunler[this.selectedIndex];
+            $("#txtUrunAd").val(obj.UrunAd);
+            $("#txtFiyat").val(obj.Fiyat);
+            $("#txtAdet").val(obj.Adet);
+
+            editingIndex = this.selectedIndex;
+
+
+        });
+
+        $("#btnSendServer").click(function () {
+            var options = {
+                url: "/Siparis/Save",
+                type: "POST",
+                contentType: "application/json",
+                data:JSON.stringify(sepet)
+            };
+
+            $.ajax(options).success(function () {
+                alert("Başarılı bir şekilde kaydedildi!");
+                sepet = { Urunler: [] };
+                $("#lstUrunler").empty();
+            }).error(function (xhr,status,error) {
+                alert("Kaydetme başarısız oldu! " + error);
+            });
+
+        });
+    </script>
+}
