@@ -36,7 +36,24 @@
 </div>
 @section scripts{
     <script>
-        var sepet = { Urunler: [], Toplam:0 };
+        var stored = JSON.parse(localStorage.getItem("sepet"));
+        var sepet =  stored == null?{ Urunler: [], Toplam: 0 }:stored;
+        PopulateSepet(sepet);
+        function PopulateSepet(sepet) {
+            if (sepet == undefined)
+                return;
+            $("#sepet").empty();
+            sepet.Urunler.forEach(function (e) {
+                var div = $("<div>")
+               .append($("<h3>").text(e.YemekAd))
+               .append($("<h4>").text(e.YemekFiyat))
+               .append($("<button>").text("Kaldır"));
+
+                $("#sepet").append(div);
+            });
+            
+        }
+        
         $(".urun button").click(function () {
             var fiyat = parseFloat($(this).prev().data("deger")),
                 urunAd = $(this).prev().prev().text();
@@ -45,26 +62,24 @@
                 YemekAd : urunAd
             }
             sepet.Urunler.push(yemek);
+            localStorage.setItem("sepet", JSON.stringify(sepet));
             UpdateToplam();
-            var div = $("<div>")
-                .append($("<h3>").text(urunAd))
-                .append($("<h4>").text(parseFloat(fiyat).toFixed(2)))
-                .append($("<button>").text("Kaldır"));
-
-            $("#sepet").append(div);
+            PopulateSepet(sepet);
         });
         function UpdateToplam() {
-            /*sepet.Toplam = sepet.Urunler.reduce(function (prev,current) {
-                if (typeof prev == "undefined" || typeof current == "undefined")
-                    return 0;
-                return prev.YemekFiyat + current.YemekFiyat;
-            });*/
+            var toplamYemek = sepet.Urunler.reduce(function (prev,current) {
+                return { YemekFiyat: prev.YemekFiyat + current.YemekFiyat };
+            })
+            sepet.Toplam = toplamYemek.YemekFiyat;
+            /*
             var toplam = 0;
             for (var i = 0; i < sepet.Urunler.length; ++i) {
                 toplam += sepet.Urunler[i].YemekFiyat;
 
             }
             sepet.Toplam = toplam;
+            */
+           
         }
     </script>    
 }
