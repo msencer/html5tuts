@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <span id="lblTick" class="label label-danger"></span><button id="btnStart" class="btn btn-danger">Start</button>
+</div>
+@section scripts{
+<script>
+    var worker = new Worker("/Scripts/ticker.js");
+    worker.addEventListener("message", function (e) {
+        $("#lblTick").text(e.data);
+    });
+
+    $("#btnStart").click(function () {
+        var txt = $(this).text();
+        if (txt == "Start") {
+            worker.postMessage(5);
+            $(this).text("Stop");
+        }
+        else { 
+            worker.terminate();
+            $(this).text("Start");
+        }
+    });
+
+
+</script>
+}
