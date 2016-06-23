@@ -1,0 +1,70 @@
+﻿@using GeneralExamples.Models;
+@model IEnumerable<Urun>
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .urun{
+        border:1px dashed red;
+        padding:10px;
+    }
+    .urun button{
+        display:inline;
+    }
+    #sepet {
+        border:1px solid black;
+        padding:10px;
+    }
+</style>
+<h2>YS</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <h3>Sepet</h3>
+        <div id="sepet"></div>
+    </div>
+    <div class="col-md-9">
+        @foreach(var urun in Model)
+        {
+            <div class="row urun" >
+                <h3>@urun.UrunAd</h3>
+                <h4 data-deger="@urun.Fiyat">@urun.Fiyat.ToString("c")</h4>
+                <button class="btn btn-default" >Sepete Ekle</button>
+            </div>
+        }
+    </div>
+</div>
+@section scripts{
+    <script>
+        var sepet = { Urunler: [], Toplam:0 };
+        $(".urun button").click(function () {
+            var fiyat = parseFloat($(this).prev().data("deger")),
+                urunAd = $(this).prev().prev().text();
+            var yemek = {
+                YemekFiyat: fiyat,
+                YemekAd : urunAd
+            }
+            sepet.Urunler.push(yemek);
+            UpdateToplam();
+            var div = $("<div>")
+                .append($("<h3>").text(urunAd))
+                .append($("<h4>").text(parseFloat(fiyat).toFixed(2)))
+                .append($("<button>").text("Kaldır"));
+
+            $("#sepet").append(div);
+        });
+        function UpdateToplam() {
+            /*sepet.Toplam = sepet.Urunler.reduce(function (prev,current) {
+                if (typeof prev == "undefined" || typeof current == "undefined")
+                    return 0;
+                return prev.YemekFiyat + current.YemekFiyat;
+            });*/
+            var toplam = 0;
+            for (var i = 0; i < sepet.Urunler.length; ++i) {
+                toplam += sepet.Urunler[i].YemekFiyat;
+
+            }
+            sepet.Toplam = toplam;
+        }
+    </script>    
+}
