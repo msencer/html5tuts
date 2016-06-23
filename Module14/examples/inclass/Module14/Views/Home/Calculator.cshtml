@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Calculator";
+}
+
+<h2>Calculator</h2>
+
+<div>
+    <input type="number" id="txtSayi1" />
+    <select id="cmbIslem">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="number" id="txtSayi2" />
+    <button id="btnHesapla" class="btn btn-info">Hesapla</button>
+</div>
+<div>
+    <span id="sonuc" class="label label-info"></span>
+</div>
+
+@section scripts{
+    <script>
+        var worker = new Worker("/Scripts/calculator.js");
+        $("#btnHesapla").click(function () {
+            var message = {
+                sayi1: parseInt($("#txtSayi1").val()),
+                sayi2: parseInt($("#txtSayi2").val()),
+                islem : $("#cmbIslem").val()
+            };
+            worker.postMessage(message);
+        });
+
+        worker.onmessage = function (e) {
+            $("#sonuc").text(e.data);
+        }
+    </script>
+}

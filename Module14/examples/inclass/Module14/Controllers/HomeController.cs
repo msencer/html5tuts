@@ -13,5 +13,11 @@ namespace Module14.Controllers
         {
             return View();
         }
+
+        public ActionResult Calculator()
+        {
+            return View();
+        }
+
     }
 }
