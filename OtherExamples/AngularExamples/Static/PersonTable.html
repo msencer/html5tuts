@@ -1,0 +1,16 @@
+﻿
+<input type="text" placeholder="Filter by Name" ng-model="filterByName" />
+<table class="table table-bordered table-striped">
+    <tr>
+        <th ng-click="sortByName()">Ad </th>
+        <th ng-click="sortBySurName()">Soyad</th>
+        <th>Doğum Tarihi</th>
+    </tr>
+    <tr ng-repeat="person in (persons | orderBy:sortBy | filter:{name:filterByName})">
+        <td>{{person.name}}</td>
+        <td>{{person.surname}}</td>
+        <td>{{person.birthDay | date:"dd/MM/yyyy"}}</td>
+    </tr>
+
+</table>
+

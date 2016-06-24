@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@*<div ng-app="" ng-init="firstName='Mehmet';lastName='Karadayi'">
+        <h2>Index</h2>
+        <input name="first" ng-model="firstName" placeholder="First Name" />
+        <input name="first" ng-model="lastName" placeholder="Last Name" />
+
+        <span ng-bind="firstName"></span>
+        <span ng-bind="lastName"></span>
+    </div>*@
+
+@*<div ng-app="" ng-init="showButton=true">
+        <button ng-show="showButton">Button1</button>
+        <button ng-hide="showButton">Button2</button>
+        <input type="checkbox" ng-model="showButton" />Göster
+    </div>*@
+
+@*<div ng-app="">
+        <input type="text" ng-disabled="editable" />
+        <button ng-disabled="editable">Kaydet</button>
+        <br />
+        <input type="checkbox" ng-model="editable" checked />
+    </div>*@
+
+@*<div ng-controller="MathController as mCtrl">
+        <input type="number" ng-model="mCtrl.sayi1" />
+        <input type="number" ng-model="mCtrl.sayi2" />
+        <button ng-click="mCtrl.topla()">Topla</button>
+        <span ng-bind="mCtrl.sonuc"></span>
+    </div>*@
+@*<div ng-controller="MathController as mCtrl">
+        <input type="number" ng-model="sayi1" />
+        <input type="number" ng-model="sayi2" />
+        <button ng-click="topla()">Topla</button>
+        <span ng-bind="sonuc"></span>
+    </div>*@
+@*<div ng-controller="PersonController as pCtrl">
+        <ul ng-repeat="person in persons">
+            <li>{{person.name + " " + person.surname}}</li>
+        </ul>
+    </div>*@
+
+
+@*<div ng-controller="PersonController as pCtrl">
+        <input type="text" placeholder="Filter by Name" ng-model="filterByName" />
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th ng-click="sortByName()">Ad </th>
+                <th ng-click="sortBySurName()">Soyad</th>
+                <th>Doğum Tarihi</th>
+            </tr>
+            <tr ng-repeat="person in (persons | orderBy:sortBy | filter:{name:filterByName})">
+                <td>{{person.name}}</td>
+                <td>{{person.surname}}</td>
+                <td>{{person.birthDay | date:"dd/MM/yyyy"}}</td>
+            </tr>
+
+        </table>
+    </div>*@
+@*<person-table></person-table>*@
+<div ng-app="myApp">
+    <div person-table></div>
+
+    <div ng-controller="PersonController">
+        <form name="personForm" ng-submit="personForm.$valid && addPerson()" novalidate>
+            <fieldset>
+                <legend>Person Ekle</legend>
+                <div class="form-group">
+                    <label>Ad:</label>
+                    <input ng-model="person.name" class="form-control" type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Soyad:</label>
+                    <input ng-model="person.surname" class="form-control" type="text" required />
+                </div>
+                <div class="form-group">
+                    <label>Dogum Tarihi:</label>
+                    <input ng-model="person.birthDay" class="form-control" type="date" required />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-info">Kaydet</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+@*<select ng-model="opt" ng-options="c for c in ['+','-','*','/']"></select>*@

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row" ng-controller="UrunController" ng-app="ys">
+    <div class="col-md-3">
+        <h3>Sepet</h3>
+        <div id="sepet" ng-repeat="urun in sepet">
+            <div>
+                <h3>{{urun.UrunAd}}</h3>
+                <h4 data-deger="urun.Fiyat">{{urun.Fiyat | currency}}</h4>
+                <button ng-click="removeFromSepet(urun)" class="btn btn-default">Sil</button>
+            </div>
+        </div>
+        <button ng-click="siparis()" class="btn btn-info">Sipariş Ver</button>
+    </div>
+    <div class="col-md-9">
+        <div class="row urun" ng-repeat="urun in urunler">
+            <h3>{{urun.UrunAd}}</h3>
+            <h4 data-deger="urun.Fiyat">{{urun.Fiyat | currency}}</h4>
+            <button ng-click="addToSepet(urun)" class="btn btn-default">Sepete Ekle</button>
+        </div>
+    </div>
+</div>
+
